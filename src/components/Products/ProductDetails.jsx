@@ -36,8 +36,8 @@ const ProductDetails = ({ product, onClose }) => {
   const toggleContent = () => setShowContent((prev) => !prev);
 
   return (
-    <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex justify-center items-center z-50 px-4">
-      <div className="bg-white md:py-6 px-6 md:px-10 rounded-lg w-[80vw] max-w-4xl relative flex flex-col md:flex-row gap-8">
+    <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex max-h-screen justify-center items-center z-50 px-4">
+      <div className="bg-white md:py-6 px-6 md:px-10 rounded-lg w-[80vw] max-w-4xl relative flex flex-col md:flex-row gap-8 max-h-[90vh] overflow-y-auto">
         <button
           className="absolute top-3 right-3 text-2xl font-bold cursor-pointer"
           onClick={onClose}
