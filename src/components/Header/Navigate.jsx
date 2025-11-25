@@ -10,7 +10,11 @@ const Navigate = () => {
 
   const handleChange = (e) => {
     const selectedCategory = e.target.value;
-    if (selectedCategory) navigate(`/${selectedCategory}`);
+    if (selectedCategory) {
+      navigate(`/category/${selectedCategory}`);
+    }else{
+      navigate('/allproducts')
+    }
   };
 
   return (
@@ -33,10 +37,10 @@ const Navigate = () => {
         "
           onChange={handleChange}
         >
-          <option value="">All Categories</option>
+          <option value="">All Products</option>
           {categories.map((item, index) => (
             <option value={item} key={index} className="uppercase">
-              {item.charAt(0).toUpperCase() + item.slice(1)}
+              {item.charAt(0).toUpperCase() + item.slice(1).replace(/-/g, " ")}
             </option>
           ))}
         </select>

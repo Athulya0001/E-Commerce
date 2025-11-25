@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { LeftArrow, RightArrow } from "../svg/Icons";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const Category = () => {
   const categories = useSelector((state) => state.products.categories);
@@ -9,7 +9,7 @@ const Category = () => {
 
   const [currentIdx, setCurrentIdx] = useState(0);
 
-  function useWindowWidth() {
+  const useWindowWidth = () => {
     const [width, setWidth] = useState(window.innerWidth);
 
     useEffect(() => {
@@ -19,33 +19,30 @@ const Category = () => {
     }, []);
 
     return width;
-  }
+  };
 
   const width = useWindowWidth();
 
-  let itemsPerSlide = 6;
-  if (width < 1028) itemsPerSlide = 5;
-  if (width < 778) itemsPerSlide = 3;
-  if (width < 640) itemsPerSlide = 2;
+  let itemsPerView = 6;
+  if (width < 1028) itemsPerView = 5;
+  if (width < 778) itemsPerView = 3;
+  if (width < 640) itemsPerView = 2;
 
-  const totalSlide = Math.ceil(categories?.length / itemsPerSlide);
+  const totalCategories = categories.length;
 
-  const visibleCategories = categories.slice(
-    currentIdx * itemsPerSlide,
-    currentIdx * itemsPerSlide + itemsPerSlide
-  );
+  const visibleCategories = [];
 
   const nextSlide = () => {
-    if (currentIdx < totalSlide - 1) {
-      setCurrentIdx(currentIdx + 1);
-    }
+    setCurrentIdx((prev) => (prev + 1) % totalCategories);
   };
 
   const prevSlide = () => {
-    if (currentIdx > 0) {
-      setCurrentIdx(currentIdx - 1);
-    }
+    setCurrentIdx((prev) => (prev - 1 + totalCategories) % totalCategories);
   };
+
+  for (let i = 0; i < itemsPerView; i++) {
+    visibleCategories.push(categories[(currentIdx + i) % totalCategories]);
+  }
 
   return (
     <div className="flex flex-col justify-center items-center px-4 sm:mx-6 md:mx-10 lg:mx-12 xl:mx-24 py-4 sm:my-6 md:my-10 lg:my-12 xl:my-24 gap-y-10">
@@ -54,7 +51,6 @@ const Category = () => {
       <div className="relative w-full z-10">
         <button
           onClick={prevSlide}
-          disabled={currentIdx === 0}
           className="absolute -left-5 top-1/2 -translate-y-1/2 bg-[#FA8232] p-2 rounded-full z-50"
         >
           <LeftArrow />
@@ -62,7 +58,6 @@ const Category = () => {
 
         <button
           onClick={nextSlide}
-          disabled={currentIdx === totalSlide - 1}
           className="absolute -right-5 top-1/2 -translate-y-1/2 bg-[#FA8232] p-2 rounded-full z-50"
         >
           <RightArrow />
@@ -77,7 +72,7 @@ const Category = () => {
             const firstProduct = categoryObj?.products?.[0];
 
             return (
-              <Link to={`/${categoryName}`} key={index}>
+              <Link to={`/category/${categoryName}`} key={index}>
                 <div
                   key={index}
                   className="flex justify-center items-center flex-col py-3 px-6 border border-[#E4E7E9] hover:drop-shadow-2xl h-[150px] sm:h-[200px]"
@@ -90,8 +85,10 @@ const Category = () => {
                     />
                   )}
                   <span className="mt-2 font-semibold text-center">
-                    {categoryName.charAt(0).toUpperCase() +
-                      categoryName.slice(1).replace(/-/g," ")}
+                    {categoryName
+                      ? categoryName.charAt(0).toUpperCase() +
+                        categoryName.slice(1).replace(/-/g, " ")
+                      : ""}
                   </span>
                 </div>
               </Link>

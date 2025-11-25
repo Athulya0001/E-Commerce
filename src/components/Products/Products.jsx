@@ -19,7 +19,7 @@ const Products = () => {
   const bestSellar = wholeProducts.filter(
     (product) => product.discountPercentage > 19
   );
-  const topRated = wholeProducts.filter((product) => product.rating > 4.9);
+  const topRated = wholeProducts.filter((product) => product.rating > 4.95);
   const newArrivals = wholeProducts.filter((product) => product.stock > 90);
 
   const CategorySection = ({ title, items }) => (

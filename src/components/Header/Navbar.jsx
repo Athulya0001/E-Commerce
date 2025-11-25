@@ -48,7 +48,7 @@ const Navbar = () => {
   }, [searchQuery, products, dispatch]);
 
   return (
-    <div className="bg-[#1B6392] text-white">
+    <div className="bg-[#1B6392] text-white sticky top-0 z-50">
       <nav
         className="
           px-4 py-3 
@@ -60,7 +60,11 @@ const Navbar = () => {
       >
         <div className="flex items-center justify-between w-full lg:w-auto">
           <Link to={"/"}>
-            <div className="flex items-center gap-2">
+            <div
+              className="flex items-center gap-2"
+              id="logo"
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            >
               <Logo color="white" />
               <span className="font-bold text-xl lg:text-2xl">CLICON</span>
             </div>
@@ -97,7 +101,7 @@ const Navbar = () => {
               onChange={(e) => setSearchQuery(e.target.value)}
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
-                  handleEnter()
+                  handleEnter();
                 }
               }}
             />
@@ -125,7 +129,7 @@ const Navbar = () => {
               onChange={(e) => setSearchQuery(e.target.value)}
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
-                  handleEnter()
+                  handleEnter();
                 }
               }}
             />

@@ -14,6 +14,7 @@ const ProductDetails = ({ product, onClose }) => {
     .replace(/\b\w/g, (c) => c.toUpperCase());
 
   const [count, setCount] = useState(1);
+  const [showContent, setShowContent] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isInCart } = useContext(ProductContext);
@@ -31,6 +32,8 @@ const ProductDetails = ({ product, onClose }) => {
       onClose();
     }
   };
+
+  const toggleContent = () => setShowContent((prev) => !prev);
 
   return (
     <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex justify-center items-center z-50 px-4">
@@ -108,11 +111,29 @@ const ProductDetails = ({ product, onClose }) => {
             </div>
           </div>
 
+          <div className="text-[#77878F] text-sm">
+            <span
+              className={`${!showContent ? "line-clamp-1" : "line-clamp-none"}`}
+            >
+              {product.description}
+            </span>
+            <span
+              onClick={toggleContent}
+              className="text-[#209ef2] cursor-pointer ml-1"
+            >
+              {showContent ? "-show less" : "show more"}
+            </span>
+          </div>
+
           <div className="flex items-center gap-3">
             <span className="text-3xl font-bold text-[#2DA5F3]">
               ${product.price}
             </span>
-            <span className="text-xs font-semibold px-3 py-1 rounded bg-[#EFD33D]">
+            <span
+              className={`${
+                product.discountPercentage < 1 ? "hidden" : "block"
+              } text-xs font-semibold px-3 py-1 rounded bg-[#EFD33D]`}
+            >
               {Math.floor(product.discountPercentage)}% OFF
             </span>
           </div>

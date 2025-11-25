@@ -89,10 +89,8 @@ const App = () => {
         {selectedCategories.map((category) => (
           <Route
             key={category}
-            path={`/${category}`}
-            element={
-              <ProductCategory category={category} products={wholeProducts} />
-            }
+            path={"/category/:category"}
+            element={<ProductCategory products={wholeProducts} />}
           />
         ))}
         <Route path="/search/:query" element={<SearchResults />} />
