@@ -26,17 +26,23 @@ export const ProductProvider = ({ children }) => {
     dispatch(setWishlist(product));
 
     if (inWish) {
-      toast("Removed from wishlist");
+      toast("Removed from wishlist", {
+        style: {
+          color: "#2DA5F3",
+        },
+      });
     } else {
       toast.success("Added to wishlist", {
         icon: <FaCheckCircle size={24} color="#2DA5F3" />,
+        style: {
+          color: "#2DA5F3",
+        },
       });
     }
   };
 
   const handleAddToCart = (product) => {
     dispatch(addToCart({ ...product, count: 1 }));
-    
   };
 
   return (
@@ -47,7 +53,7 @@ export const ProductProvider = ({ children }) => {
         toggleWishlist,
         isInCart,
         isInWish,
-        handleAddToCart
+        handleAddToCart,
       }}
     >
       {children}

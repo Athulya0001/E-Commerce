@@ -19,6 +19,10 @@ const cartSlice = createSlice({
   reducers: {
     addToCart: (state, action) => {
       const item = action.payload;
+      if (item.stock < 1) {
+        toast.error("Out of stock!");
+        return;
+      }
       const existing = state.cartItems.find((p) => p.id === item.id);
 
       if (existing) {
@@ -26,9 +30,22 @@ const cartSlice = createSlice({
         existing.count = Math.min(existing.count + item.count, existing.stock);
 
         if (existing.count > oldCount) {
-          toast.success("Item quantity increased in cart!");
+          toast.success("Item quantity increased in cart!", {
+            icon: () =>
+              React.createElement(FaCheckCircle, {
+                size: 24,
+                color: "#2DA5F3",
+              }),
+            style: {
+              color: "#2DA5F3",
+            },
+          });
         } else {
-          toast.info("Reached maximum stock limit!");
+          toast.info("Reached maximum stock limit!", {
+            style: {
+              color: "#2DA5F3",
+            },
+          });
         }
       } else {
         state.cartItems.push({
@@ -39,6 +56,9 @@ const cartSlice = createSlice({
         toast.success("Item added to cart", {
           icon: () =>
             React.createElement(FaCheckCircle, { size: 24, color: "#2DA5F3" }),
+          style:{
+            color:"#2DA5F3"
+          }
         });
       }
 
@@ -50,26 +70,43 @@ const cartSlice = createSlice({
         (item) => item.id !== action.payload
       );
 
-      toast("Item removed from cart.");
+      toast("Item removed from cart.",{
+        style:{
+          color:"#2DA5F3"
+        }
+      });
 
       saveToLocalStorage(state.cartItems);
     },
-
     increaseQty: (state, action) => {
       const item = state.cartItems.find((p) => p.id === action.payload);
-      if (item && item.count < item.stock) {
+      if (!item) return;
+
+      if (item.count < item.stock) {
         item.count += 1;
+      } else {
+        toast.info("Reached maximum stock limit!");
       }
+
       saveToLocalStorage(state.cartItems);
     },
 
     decreaseQty: (state, action) => {
       const item = state.cartItems.find((p) => p.id === action.payload);
-      if (item && item.count > 1) {
+      if (!item) return;
+
+      if (item.count > 1) {
         item.count -= 1;
+      } else {
+        state.cartItems = state.cartItems.filter(
+          (item) => item.id !== action.payload
+        );
+        toast("Item removed from cart");
       }
+
       saveToLocalStorage(state.cartItems);
     },
+
     clearCart: (state) => {
       state.cartItems = [];
       saveToLocalStorage([]);

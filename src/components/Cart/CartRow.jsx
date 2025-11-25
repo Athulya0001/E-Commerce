@@ -42,7 +42,6 @@ const CartRow = ({ product }) => {
           <button
             className="text-lg"
             onClick={() => dispatch(increaseQty(product.id))}
-            disabled={product.count >= product.stock}
           >
             +
           </button>
