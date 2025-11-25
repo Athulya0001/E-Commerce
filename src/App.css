@@ -1,0 +1,74 @@
+.d1 {
+  font-size: 64px;
+}
+.d2 {
+  font-size: 56px;
+}
+.d3 {
+  font-size: 48px;
+}
+.d4 {
+  font-size: 40px;
+}
+.head1 {
+  font-size: 32px;
+}
+.head2 {
+  font-size: 28px;
+}
+.head3 {
+  font-size: 24px;
+}
+.head4 {
+  font-size: 16px;
+}
+.head5 {
+  font-size: 14px;
+}
+.head6 {
+  font-size: 20px;
+}
+
+.listHover {
+  cursor: pointer;
+}
+.listHover:hover {
+  color: white;
+}
+
+@keyframes slide-left {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+.animate-slide-left {
+  animation: slide-left 0.25s ease-out;
+}
+
+@keyframes fade-down {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-down {
+  animation: fade-down 0.25s ease-out;
+}
+
+.menu-item-mobile {
+  width: 100%;
+  padding: 5px 10px;
+  border-radius: 8px;
+}
+
+.menu-item-mobile:hover {
+  background-color: white;
+  color: #1B6392;
+}

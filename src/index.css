@@ -1,0 +1,8 @@
+@import "tailwindcss";
+@import "@fontsource/public-sans/400.css";
+@import "@fontsource/public-sans/700.css";
+@import "keen-slider/keen-slider.min.css";
+
+body {
+  font-family: "Public Sans", sans-serif;
+}
