@@ -1,16 +1,12 @@
 import React, { useContext } from "react";
-import ProductCard from "../Cards/ProductCard";
 import Navbar from "../Header/Navbar";
-import { Link } from "react-router-dom";
-import { FiHome } from "react-icons/fi";
-import { HiOutlineChevronRight } from "react-icons/hi";
 import ProductDetails from "../Products/ProductDetails";
 import Footer from "../Footer/Footer";
 import { ProductContext } from "../../Context/ProductContext";
-import ItemCard from "../Cards/ItemCard";
 import { useSelector } from "react-redux";
 import SectionHeader from "../Header/SectionHeader";
 import Navigate from "../Header/Navigate";
+import Card from "../Cards/Card";
 
 const Wishlist = ({ wishlist }) => {
   const { selectedProduct, setSelectedProduct } = useContext(ProductContext);
@@ -31,9 +27,9 @@ const Wishlist = ({ wishlist }) => {
           </p>
         </div>
       ) : (
-        <div className="py-4 px-4 my-2 sm:mx-6 md:mx-10 lg:mx-12 xl:mx-24 flex flex-wrap items-center gap-2 text-sm sm:text-base">
+        <div className="py-4 px-4 my-2 sm:mx-6 md:mx-10 lg:mx-12 xl:mx-24 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 mt-6 gap-4 text-sm sm:text-base">
           {wishlist.map((product) => (
-            <ItemCard product={product} key={product.id} />
+            <Card product={product} key={product.id} />
           ))}
         </div>
       )}

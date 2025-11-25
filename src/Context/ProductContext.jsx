@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setWishlist } from "../redux/reducers/productSlice";
 import { toast } from "react-toastify";
 import { FaCheckCircle } from "react-icons/fa";
+import { addToCart } from "../redux/reducers/cartSlice";
 
 export const ProductContext = createContext();
 
@@ -20,17 +21,22 @@ export const ProductProvider = ({ children }) => {
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   const toggleWishlist = (product) => {
-    const inWish = isInWish(product); 
+    const inWish = isInWish(product);
 
     dispatch(setWishlist(product));
 
     if (inWish) {
       toast("Removed from wishlist");
     } else {
-      toast.success("Added to wishlist",{
-        icon: <FaCheckCircle size={24} color="#2DA5F3" />
+      toast.success("Added to wishlist", {
+        icon: <FaCheckCircle size={24} color="#2DA5F3" />,
       });
     }
+  };
+
+  const handleAddToCart = (product) => {
+    dispatch(addToCart({ ...product, count: 1 }));
+    
   };
 
   return (
@@ -41,6 +47,7 @@ export const ProductProvider = ({ children }) => {
         toggleWishlist,
         isInCart,
         isInWish,
+        handleAddToCart
       }}
     >
       {children}

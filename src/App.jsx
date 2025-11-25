@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import Home from "./componets/Home/Home";
-import Cart from "./componets/Cart/Cart";
+import Home from "./components/Home/Home";
+import Cart from "./components/Cart/Cart";
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import axios from "axios";
@@ -11,9 +11,10 @@ import {
   setProducts,
   setWholeProducts,
 } from "./redux/reducers/productSlice";
-import AllProducts from "./componets/Products/AllProducts";
-import ProductCategory from "./componets/Category/ProductCategory";
-import Wishlist from "./componets/Wishlist/Wishlist";
+import AllProducts from "./components/Products/AllProducts";
+import ProductCategory from "./components/Category/ProductCategory";
+import Wishlist from "./components/Wishlist/Wishlist";
+import SearchResults from "./components/Search/SearchResults";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -21,20 +22,26 @@ const App = () => {
   const wishlist = useSelector((state) => state.products.wishlist);
 
   const selectedCategories = [
+    "beauty",
+    "fragrances",
+    "skin-care",
+    "womens-jewellery",
+    "sunglasses",
+    "womens-shoes",
+    "mens-shoes",
+    "womens-bags",
+    "womens-dresses",
+    "tops",
+    "mens-shirts",
+    "womens-watches",
+    "mens-watches",
+    "sports-accessories",
     "smartphones",
     "laptops",
     "mobile-accessories",
     "tablets",
     "motorcycle",
     "vehicle",
-    "mens-watches",
-    "sports-accessories",
-    "womens-bags",
-    "mens-shoes",
-    "womens-jewellery",
-    "womens-shoes",
-    "mens-shirts",
-    "womens-watches",
   ];
 
   useEffect(() => {
@@ -71,7 +78,7 @@ const App = () => {
 
   return (
     <div>
-      <ToastContainer autoClose={1000} hideProgressBar={true}/>
+      <ToastContainer autoClose={1000} hideProgressBar={true} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/cart" element={<Cart />} />
@@ -88,6 +95,7 @@ const App = () => {
             }
           />
         ))}
+        <Route path="/search/:query" element={<SearchResults />} />
         <Route path="/wishlist" element={<Wishlist wishlist={wishlist} />} />
       </Routes>
     </div>

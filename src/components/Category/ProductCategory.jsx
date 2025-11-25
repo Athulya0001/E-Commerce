@@ -7,7 +7,7 @@ import { FiHome } from "react-icons/fi";
 import { HiOutlineChevronRight } from "react-icons/hi";
 import ProductDetails from "../Products/ProductDetails";
 import Footer from "../Footer/Footer";
-import ItemCard from "../Cards/ItemCard";
+import Card from "../Cards/Card";
 
 const ProductCategory = ({ category,products }) => {
   const { selectedProduct, setSelectedProduct } = useContext(ProductContext);
@@ -35,12 +35,12 @@ const ProductCategory = ({ category,products }) => {
             {category.replace(/-/g, " ")}
           </h1>
 
-          <div className="flex items-center flex-wrap gap-4 mt-3">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 mt-6 gap-4">
             {products
               .filter((product) => product.category === category)
               .map((product, ind) => (
                 <div key={`${category}-prod-${ind}`}>
-                  <ItemCard product={product} />
+                  <Card product={product} key={product}/>
                 </div>
               ))}
           </div>
