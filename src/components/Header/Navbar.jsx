@@ -59,16 +59,14 @@ const Navbar = () => {
         "
       >
         <div className="flex items-center justify-between w-full lg:w-auto">
-          <Link to={"/"}>
-            <div
-              className="flex items-center gap-2"
-              id="logo"
-              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            >
-              <Logo color="white" />
-              <span className="font-bold text-xl lg:text-2xl">CLICON</span>
-            </div>
-          </Link>
+          <div
+            className="flex items-center gap-2"
+            id="logo"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          >
+            <Logo color="white" />
+            <span className="font-bold text-xl lg:text-2xl">CLICON</span>
+          </div>
 
           <div className="flex items-center gap-4 lg:hidden">
             <button

@@ -3,10 +3,16 @@ import { BrowseArrow, Divider, Logo } from "../svg/Icons";
 import { useSelector } from "react-redux";
 import { SiGoogleplay } from "react-icons/si";
 import { FaApple } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Footer = () => {
   const categories = useSelector((state) => state.products.categories);
+  const navigate = useNavigate();
+  const handleNavigate = (path) => {
+    navigate(path);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   const tags = [
     "Game",
     "iPhone",
@@ -26,7 +32,13 @@ const Footer = () => {
     <div className="bg-[#191C1F] py-6 sm:mt-6 md:mt-10 lg:mt-12 xl:mt-24">
       <div className="flex flex-col sm:flex-wrap sm:flex-row justify-center px-4 gap-10 sm:mx-6 md:mx-10 lg:mx-12 xl:mx-24 sm:my-4 md:my-6 lg:my-8 xl:my-16">
         <div className="flex flex-col gap-6 flex-1 min-w-[250px]">
-          <div className="flex items-center gap-2">
+          <div
+            className="flex items-center gap-2 cursor-pointer"
+            onClick={(e) => {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
+          >
             <Logo color={"#FA8232"} />
             <span className="font-bold text-white text-xl lg:text-2xl">
               CLICON
@@ -54,7 +66,7 @@ const Footer = () => {
             </li>
             <li className="listHover">Camera & Photo</li>
             <li className="listHover">TV & Homes</li>
-            <Link to={'/allproducts'}>
+            <Link to={"/allproducts"}>
               <li className="text-[#EBC80C] flex items-center gap-2">
                 Browse All Product <BrowseArrow color={"#EBC80C"} />
               </li>
@@ -65,9 +77,18 @@ const Footer = () => {
         <div className="flex flex-col gap-6 flex-1 min-w-[200px]">
           <h1 className="uppercase text-white text-base">Quick links</h1>
           <ul className="text-[#929FA5] head5 flex flex-col gap-3">
-            <li className="listHover">Shop Product</li>
-            <li className="listHover">Shopping Cart</li>
-            <li className="listHover">Wishlist</li>
+            <li className="listHover" onClick={() => handleNavigate("/")}>
+              Shop Product
+            </li>
+            <li className="listHover" onClick={() => handleNavigate("/cart")}>
+              Shopping Cart
+            </li>
+            <li
+              className="listHover"
+              onClick={() => handleNavigate("/wishlist")}
+            >
+              Wishlist
+            </li>
             <li className="listHover">Compare</li>
             <li className="listHover">Track Order</li>
             <li className="listHover">Customer Help</li>
