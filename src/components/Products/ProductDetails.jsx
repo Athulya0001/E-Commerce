@@ -106,7 +106,7 @@ const ProductDetails = ({ product, onClose }) => {
 
               <span className="text-gray-700">
                 Category:{" "}
-                <span className="text-green-600">{formattedCategory}</span>
+                <span>{formattedCategory}</span>
               </span>
             </div>
           </div>
