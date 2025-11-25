@@ -8,8 +8,9 @@ import { HiOutlineChevronRight } from "react-icons/hi";
 import ProductDetails from "../Products/ProductDetails";
 import Footer from "../Footer/Footer";
 import Card from "../Cards/Card";
+import SectionHeader from "../Header/SectionHeader";
 
-const ProductCategory = ({ category,products }) => {
+const ProductCategory = ({ category, products }) => {
   const { selectedProduct, setSelectedProduct } = useContext(ProductContext);
 
   return (
@@ -17,20 +18,10 @@ const ProductCategory = ({ category,products }) => {
       <Navbar />
       <Navigate />
       <div className="bg-[#F2F4F5] my-3 mt-10">
-        <div className="py-4 px-4 my-2 sm:mx-6 md:mx-10 lg:mx-12 xl:mx-24 flex flex-wrap items-center gap-2 text-sm sm:text-base">
-          <Link to={"/"} className="flex justify-center items-center gap-2">
-            <FiHome />
-            <span className="text-[#5F6C72] head5">Home</span>
-          </Link>
-          <HiOutlineChevronRight size={15} color="#77878F" />
-          <span className="text-[#2DA5F3] head5 uppercase">{category}</span>
-        </div>
+        <SectionHeader section={category} />
       </div>
       <div className="py-4 px-4 my-2 sm:mx-6 md:mx-10 lg:mx-12 xl:mx-24 flex flex-wrap items-center gap-2 text-sm sm:text-base">
-        <div
-          key={`cat-${category}`}
-          className="flex flex-col w-full mb-6"
-        >
+        <div key={`cat-${category}`} className="flex flex-col w-full mb-6">
           <h1 className="uppercase font-bold text-lg">
             {category.replace(/-/g, " ")}
           </h1>
@@ -40,7 +31,7 @@ const ProductCategory = ({ category,products }) => {
               .filter((product) => product.category === category)
               .map((product, ind) => (
                 <div key={`${category}-prod-${ind}`}>
-                  <Card product={product} key={product}/>
+                  <Card product={product} key={product} />
                 </div>
               ))}
           </div>
