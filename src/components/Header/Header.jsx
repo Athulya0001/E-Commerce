@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Close,
   Dropdown,
@@ -12,7 +12,14 @@ import {
 } from "../svg/Icons";
 
 const Header = () => {
-  const [showBanner, setShowBanner] = useState(true);
+  const [showBanner, setShowBanner] = useState(() => {
+    const stored = sessionStorage.getItem("showBanner");
+    return stored !== null ? JSON.parse(stored) : true;
+  });
+
+  useEffect(() => {
+    sessionStorage.setItem("showBanner", JSON.stringify(showBanner));
+  }, [showBanner]);
   return (
     <div className="text-white w-full hidden lg:block ">
       {showBanner && (
