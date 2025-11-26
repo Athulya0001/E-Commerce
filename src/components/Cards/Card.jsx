@@ -8,8 +8,13 @@ import { AiOutlineEye } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 
 const Card = ({ product }) => {
-  const { setSelectedProduct, toggleWishlist, isInCart, isInWish,handleAddToCart } =
-    useContext(ProductContext);
+  const {
+    setSelectedProduct,
+    toggleWishlist,
+    isInCart,
+    isInWish,
+    handleAddToCart,
+  } = useContext(ProductContext);
 
   return (
     <div className="relative p-3 border border-[#E4E7E9] group cursor-pointer">
@@ -93,7 +98,14 @@ const Card = ({ product }) => {
       </h3>
 
       <span className="head5 text-[#2DA5F3] font-semibold mt-1 text-sm sm:text-base">
-        ${product.price}
+        <span className="text-xs text-[#a19e9e] line-through">
+          ${product?.price}
+        </span>{" "}
+        $
+        {(
+          product?.price *
+          (1 - product.discountPercentage / 100)
+        ).toFixed(2)}
       </span>
     </div>
   );

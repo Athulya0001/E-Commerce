@@ -6,17 +6,18 @@ import SectionHeader from "../Header/SectionHeader";
 import Card from "../Cards/Card";
 import { ProductContext } from "../../Context/ProductContext";
 import ProductDetails from "../Products/ProductDetails";
-import Footer from '../Footer/Footer'
+import Footer from "../Footer/Footer";
 
 const SearchResults = () => {
   const { query } = useParams();
   const products = useSelector((s) => s.products.wholeProducts);
-  const {selectedProduct,setSelectedProduct} = useContext(ProductContext)
+  const { selectedProduct, setSelectedProduct } = useContext(ProductContext);
 
   const results = products.filter(
     (p) =>
       p.title?.toLowerCase().includes(query.toLowerCase()) ||
-      p.category?.toLowerCase().includes(query.toLowerCase())
+      p.category?.toLowerCase().includes(query.toLowerCase()) ||
+      p.tags?.some((tag) => tag?.toLowerCase().includes(query.toLowerCase()))
   );
 
   return (
@@ -37,7 +38,7 @@ const SearchResults = () => {
         product={selectedProduct}
         onClose={() => setSelectedProduct(null)}
       />
-      <Footer/>
+      <Footer />
     </div>
   );
 };

@@ -38,7 +38,11 @@ const Navbar = () => {
 
         const categoryMatch = p.category?.toLowerCase().startsWith(lowerQuery);
 
-        return titleMatch || categoryMatch;
+        const tagMatch = p.tags?.some((tag) =>
+          tag?.toLowerCase().includes(lowerQuery)
+        );
+
+        return titleMatch || categoryMatch || tagMatch;
       });
 
       dispatch(setSearchResults(filtered));
@@ -153,7 +157,7 @@ const Navbar = () => {
           <Link to="/cart" className="relative">
             <CartIcon />
             {cartCount > 0 && (
-              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">
+              <span className="absolute -top-2 -right-2 bg-white text-black text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">
                 {cartCount}
               </span>
             )}
@@ -161,7 +165,7 @@ const Navbar = () => {
           <Link to="/wishlist" className="relative">
             <WishIcon />
             {wishlistCount > 0 && (
-              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">
+              <span className="absolute -top-2 -right-2 bg-white text-black text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">
                 {wishlistCount}
               </span>
             )}

@@ -126,7 +126,14 @@ const BestDeals = () => {
             </h3>
 
             <span className="font-semibold text-[#2DA5F3] text-xl my-2">
-              ${featuredProduct?.price}
+              <span className="text-base text-[#a19e9e] line-through">
+                ${featuredProduct?.price}
+              </span>{" "}
+              $
+              {(
+                featuredProduct?.price *
+                (1 - featuredProduct.discountPercentage / 100)
+              ).toFixed(2)}
             </span>
 
             <p className="text-[#5F6C72] text-sm line-clamp-5 my-2">
@@ -135,7 +142,7 @@ const BestDeals = () => {
 
             <div className="flex justify-between items-center gap-2 mt-auto">
               <div
-                className="p-2 bg-[#FFE7D6] rounded cursor-pointer"
+                className="p-2 bg-[#FFE7D6] cursor-pointer"
                 onClick={(e) => {
                   e.stopPropagation();
                   toggleWishlist(featuredProduct);
@@ -158,7 +165,7 @@ const BestDeals = () => {
                   }
                 }}
               >
-                <div className="flex justify-center items-center bg-[#FA8232] px-4 py-2 gap-2 w-full rounded">
+                <div className="flex justify-center items-center bg-[#FA8232] px-6 py-2 gap-2 w-full">
                   {isInCart(featuredProduct) ? (
                     <BsCartCheck size={22} color="white" />
                   ) : (
@@ -172,7 +179,7 @@ const BestDeals = () => {
               </Link>
 
               <div
-                className="p-2 bg-[#FFE7D6] rounded cursor-pointer"
+                className="p-2 bg-[#FFE7D6] cursor-pointer"
                 onClick={(e) => {
                   e.stopPropagation();
                   setSelectedProduct(featuredProduct);
@@ -186,9 +193,7 @@ const BestDeals = () => {
 
         {otherRandomProducts?.length > 0 &&
           otherRandomProducts.map((product, idx) => {
-            return (
-              <Card product={product} key={idx}/>
-            );
+            return <Card product={product} key={idx} />;
           })}
       </div>
     </div>

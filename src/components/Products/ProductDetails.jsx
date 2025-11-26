@@ -152,32 +152,32 @@ const ProductDetails = ({ product, onClose }) => {
             </div>
             <div className="flex lg:hidden items-center gap-4">
               <span>Quantity: </span>
-              <div className="flex items-center gap-4 border-2 rounded border-[#E4E7E9] px-6 py-2">
-                <button className="text-xl cursor-pointer" onClick={decrement}>
+              <div className="flex items-center gap-4 border-2 rounded-xs border-[#E4E7E9] px-6 py-2">
+                <button className="text-base cursor-pointer" onClick={decrement}>
                   -
                 </button>
                 <span className="text-base text-[#475156]">{count}</span>
-                <button className="text-xl cursor-pointer" onClick={increment}>
+                <button className="text-base cursor-pointer" onClick={increment}>
                   +
                 </button>
               </div>
             </div>
 
             <div
-              className="flex justify-center items-center bg-[#FA8232] border-2 border-[#FA8232] px-6 py-2 gap-2 w-full lg:w-auto rounded text-white cursor-pointer"
+              className="flex justify-center items-center bg-[#FA8232] border-3 border-[#FA8232] px-8 py-2 gap-2 w-full lg:w-auto rounded-xs text-white cursor-pointer uppercase"
               onClick={handleAddToCart}
             >
               <span className="text-xs">
                 {isInCart(product) ? "Go to Cart" : "Add to Cart"}
               </span>
               {isInCart(product) ? (
-                <BsCartCheck size={24} />
+                <BsCartCheck size={22} />
               ) : (
-                <FiShoppingCart size={24} />
+                <FiShoppingCart size={22} />
               )}
             </div>
 
-            <button className="w-full lg:w-auto cursor-pointer px-8 py-2 border-2 border-[#FA8232] text-base text-[#FA8232] rounded">
+            <button className="w-full lg:w-auto cursor-pointer px-8 py-2 border-2 border-[#FA8232] text-sm text-[#FA8232] rounded-xs uppercase">
               Buy Now
             </button>
           </div>
